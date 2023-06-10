@@ -37,6 +37,8 @@ section {
 }
 .text-centre{
     text-align: center;
+    margin: auto;
+    max-width: 680px;
 }
 .flex {
     display: flex;
@@ -92,4 +94,40 @@ h1,p {
         }
     }
     
+}
+
+//filtered dishes
+.filtered-dishes{
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 30px;
+        li{
+            background-color: #ffb902;
+            color: white;
+            padding: 12px;
+            border-radius: 30px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all ease 0.3s;
+            &.active{
+                background-color: black;
+            }
+            &:hover{
+                background-color: black;
+            }
+        }
+    }
+}
+.filtered-dishes-results{
+    margin-top: 60px;
+    h5{
+        margin-top: 18px;
+    }
+    li{
+        width: 22%;
+        background-color: white;
+    }
 }
