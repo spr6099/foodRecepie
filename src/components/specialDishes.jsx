@@ -1,7 +1,7 @@
 import React from "react";
 
 function SpecialDishes(props) {
-  console.log("props are", props.specialMenu);
+  // console.log("props are", props.specialMenu);
 
   let maxSpecialDishes = 8
 
