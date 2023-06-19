@@ -11,8 +11,8 @@ function FilteredDishes(props) {
 let singleDishItems = props.singleDish.map((items)=>{
 return(
   <li>
-    <img src={strMealThumb} className="br-10" />
-    <h5>{strMeal}</h5>
+    <img src={items.strMealThumb} className="br-10" />
+    <h5>{items.strMeal}</h5>
   </li>
 )
 })
@@ -66,6 +66,7 @@ return(
           </div>
           <div className="filtered-dishes-results">
             <ul className="flex flex-wrap gap-30">
+              {singleDishItems}
               {filterdDishes.length != 0 ? (
                 filterdDishes
               ) : (
