@@ -44,7 +44,8 @@ function Menus() {
         <FilteredDishes 
         menuCategories={category} 
         allMenus={menu} 
-        singleDish = {singleDish}/>
+        singleDish = {singleDish}
+        setSingleDish = {setSingleDish}/>
       ) : null}
     </div>
   );

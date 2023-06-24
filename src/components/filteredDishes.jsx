@@ -1,12 +1,20 @@
 import React, { useState } from "react";
+import Pagination from "./pagination";
 
 function FilteredDishes(props) {
   let [allMenus, setAllMenus] = useState(props.allMenus);
   let [filterdDishes, setFilteredDishes] = useState([]);
-  let [activeDishes, setActiveDishes] = useState();
+  let [activeDishes, setActiveDishes] = useState("Beef");
+  //pagination
+  let [currentPage, setCurrentPage] = useState(1);
+  let [itemsPerPage, setItemsPerPage] = useState(4);
+
+  let indexOfLastdish = currentPage * itemsPerPage;
+  let indexOfFirstDish = indexOfLastdish - itemsPerPage;
+
+  let showTheseDishes = filterdDishes.slice(indexOfFirstDish , indexOfLastdish);
 
 
-  console.log("singleDishdd", props.singleDish);
 // lets show only single dishes
 let singleDishItems = props.singleDish.map((items)=>{
 return(
@@ -20,6 +28,7 @@ return(
 
 //  show dishes on Click
   function ShowFilterdDishes(category) {
+    props.setSingleDish([]);
     setActiveDishes(category);
     let filteredDishesAre = allMenus
       .filter((item) => {
@@ -51,7 +60,7 @@ return(
   });
 
   return (
-    <div className="filtered-dishes">
+    <div >
       <div className="container">
         <div className="text-centre">
           <h2>choose your dishes</h2>
@@ -61,14 +70,15 @@ return(
             recusandae pariatur quis necessitatibus, doloribus accusantium neque
             quasi labore quidem illo?
           </p>
-          <div className="filterd-dishes">
+          </div>
+          <div className="filtered-dishes">
             <ul>{allCategories}</ul>
           </div>
           <div className="filtered-dishes-results">
             <ul className="flex flex-wrap gap-30">
               {singleDishItems}
-              {filterdDishes.length != 0 ? (
-                filterdDishes
+              {filterdDishes.length !=0 || singleDishItems !=0 ? (
+                showTheseDishes
               ) : (
                 <div className="alert">
                   <h3>sorry..no item found</h3>
@@ -76,7 +86,12 @@ return(
               )}
             </ul>
           </div>
-        </div>
+          {/* pagination */}
+          <Pagination
+          filterdDishes = {filterdDishes}
+          itemsPerPage = {itemsPerPage}
+          setCurrentPage = {setCurrentPage}
+          /> 
       </div>
     </div>
   );

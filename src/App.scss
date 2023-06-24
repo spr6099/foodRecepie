@@ -120,15 +120,15 @@ h1,p {
             }
         }
     }
-}
+ }
 .filtered-dishes-results{
     margin-top: 60px;
+    
     h5{
         margin-top: 18px;
     }
     li{
         width: 22%;
-        background-color: white;
     }
 }
 
@@ -145,5 +145,28 @@ h1,p {
     h3{
         color: red;
         margin: 0 0 10px 0;
+    }
+}
+
+// pagination
+.pagination {
+    justify-content: center;
+    margin: 50px 0 0;
+    li {
+        background-color:aquamarine;
+        // width: 30px;
+        // height: 30px;
+        border: 1px solid gray;
+        margin: 0 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 8px;
+        transition: all ease 0.3s;
+        &:hover{
+            background-color: #ffb902;
+            border-color: #ffb902;
+        }
     }
 }
