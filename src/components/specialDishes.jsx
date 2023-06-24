@@ -2,7 +2,7 @@ import React ,{useState} from "react";
 import CardDish from "./cardDish";
 import PopUp from "./PopUp";
 function SpecialDishes(props) {
-  let [showPopUp , setShowPopUp] = useState(true);
+  let [showPopUp , setShowPopUp] = useState(false);
 
   let maxSpecialDishes = 8
   let specialMenu = props.specialMenu.map((menuItem,index) => {
