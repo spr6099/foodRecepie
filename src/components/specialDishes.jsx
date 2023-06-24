@@ -1,24 +1,22 @@
-import React from "react";
-
+import React ,{useState} from "react";
+import CardDish from "./cardDish";
+import PopUp from "./PopUp";
 function SpecialDishes(props) {
-  // console.log("props are", props.specialMenu);
+  let [showPopUp , setShowPopUp] = useState(true);
 
   let maxSpecialDishes = 8
-
   let specialMenu = props.specialMenu.map((menuItem,index) => {
     if(index < maxSpecialDishes){
         return (
-            <li>
-              <img src={menuItem.strMealThumb} className="br-10"/>
-              <h4>{menuItem.strMeal }</h4>
-            </li>
+            <CardDish menuItem={menuItem}/>
           );
 
     }
    
   });
   return (
-    <section className="special-dishes">
+    <section className="special-dishes ">
+      {showPopUp &&  <PopUp></PopUp>}
       <div className="container">
         <div className="special-dishes-content text-centre">
           <h2>our special dishes</h2>

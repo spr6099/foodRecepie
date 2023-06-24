@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Pagination from "./pagination";
+import CardDish from "./cardDish";
 
 function FilteredDishes(props) {
   let [allMenus, setAllMenus] = useState(props.allMenus);
@@ -12,21 +13,22 @@ function FilteredDishes(props) {
   let indexOfLastdish = currentPage * itemsPerPage;
   let indexOfFirstDish = indexOfLastdish - itemsPerPage;
 
-  let showTheseDishes = filterdDishes.slice(indexOfFirstDish , indexOfLastdish);
+  let showTheseDishes = filterdDishes.slice(indexOfFirstDish, indexOfLastdish);
 
+  // lets show only single dishes
+  let maxLength = 8;
+  let singleDishItems = props.singleDish.map((items, index) => {
+    if (index < maxLength) {
+      return (
+        <li>  
+        <img src={items.strMealThumb} className="br-10" />
+        <h4>{items.strMeal}</h4>
+        </li>
+      );
+    }
+  });
 
-// lets show only single dishes
-let singleDishItems = props.singleDish.map((items)=>{
-return(
-  <li>
-    <img src={items.strMealThumb} className="br-10" />
-    <h5>{items.strMeal}</h5>
-  </li>
-)
-})
-
-
-//  show dishes on Click
+  //  show dishes on Click
   function ShowFilterdDishes(category) {
     props.setSingleDish([]);
     setActiveDishes(category);
@@ -36,10 +38,7 @@ return(
       })
       .map((item) => {
         return (
-          <li>
-            <img src={item.strMealThumb} className="br-10" alt="" />
-            <h5>{item.strMeal}</h5>
-          </li>
+         <CardDish menuItem={item}/>
         );
       });
     setFilteredDishes(filteredDishesAre);
@@ -60,7 +59,7 @@ return(
   });
 
   return (
-    <div >
+    <div>
       <div className="container">
         <div className="text-centre">
           <h2>choose your dishes</h2>
@@ -70,28 +69,28 @@ return(
             recusandae pariatur quis necessitatibus, doloribus accusantium neque
             quasi labore quidem illo?
           </p>
-          </div>
-          <div className="filtered-dishes">
-            <ul>{allCategories}</ul>
-          </div>
-          <div className="filtered-dishes-results">
-            <ul className="flex flex-wrap gap-30">
-              {singleDishItems}
-              {filterdDishes.length !=0 || singleDishItems !=0 ? (
-                showTheseDishes
-              ) : (
-                <div className="alert">
-                  <h3>sorry..no item found</h3>
-                </div>
-              )}
-            </ul>
-          </div>
-          {/* pagination */}
-          <Pagination
-          filterdDishes = {filterdDishes}
-          itemsPerPage = {itemsPerPage}
-          setCurrentPage = {setCurrentPage}
-          /> 
+        </div>
+        <div className="filtered-dishes">
+          <ul>{allCategories}</ul>
+        </div>
+        <div className="filtered-dishes-results">
+          <ul className="flex flex-wrap gap-30">
+            {singleDishItems}
+            {filterdDishes.length != 0 || singleDishItems != 0 ? (
+              showTheseDishes
+            ) : (
+              <div className="alert">
+                <h3>sorry..no item found</h3>
+              </div>
+            )}
+          </ul>
+        </div>
+        {/* pagination */}
+        <Pagination
+          filterdDishes={filterdDishes}
+          itemsPerPage={itemsPerPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   );
