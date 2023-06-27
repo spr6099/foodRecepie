@@ -1,22 +1,34 @@
-import React ,{useState} from "react";
+import React, { useState } from "react";
 import CardDish from "./cardDish";
 import PopUp from "./PopUp";
 function SpecialDishes(props) {
-  let [showPopUp , setShowPopUp] = useState(true);
+  let [showPopUp, setShowPopUp] = useState(false);
+  let [currentDish, setCurrentDish] = useState("");
 
-  let maxSpecialDishes = 8
-  let specialMenu = props.specialMenu.map((menuItem,index) => {
-    if(index < maxSpecialDishes){
-        return (
-            <CardDish menuItem={menuItem}/>
-          );
+  function showPopupHandler(dishItem) {
+    console.log(dishItem);
+    setShowPopUp(true);
+    setCurrentDish(dishItem);
+  }
+  function closePopUpHandler() {
+    setShowPopUp(false);
+  }
 
+  let maxSpecialDishes = 8;
+  let specialMenu = props.specialMenu.map((menuItem, index) => {
+    if (index < maxSpecialDishes) {
+      return <CardDish menuItem={menuItem} showPopup={showPopupHandler} />;
     }
-   
   });
   return (
     <section className="special-dishes ">
-      {showPopUp &&  <PopUp></PopUp>}
+      {showPopUp && (
+        <PopUp
+          closePopUp={closePopUpHandler}
+          currentDish={currentDish}
+          allDishes={props.specialMenu}
+        ></PopUp>
+      )}
       <div className="container">
         <div className="special-dishes-content text-centre">
           <h2>our special dishes</h2>

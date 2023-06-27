@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Hero from "./hero";
 import SpecialDishes from "./specialDishes";
 import FilteredDishes from "./filteredDishes";
+import Header from "./header";
 
 function Menus() {
   let [menu, setMenu] = useState([]);
@@ -38,6 +39,7 @@ function Menus() {
 
   return (
     <div>
+      <Header/>
       <Hero />
       {!loading ? <SpecialDishes specialMenu={menu} /> : <h1>Loading</h1>}
       {!loading ? (
