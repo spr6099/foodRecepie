@@ -1,29 +1,50 @@
 import React, { useState, useEffect } from "react";
+import Hero from "./hero";
+import SpecialDishes from "./specialDishes";
+import FilteredDishes from "./filteredDishes";
+import Header from "./header";
+import {AllMenus} from "./AllMenuContext";
 
 function Menus() {
-  let [menu, setMenu] = useState([]);
+  let [category, setCategory] = useState([]);
+  let [singleDish, setSingleDish] = useState();
 
-  async function getAllTheMenus() {
-    const API = "https://www.themealdb.com/api/json/v1/1/search.php?f=a";
+ 
+  async function getAllTheCategories() {
+    const API = "https://www.themealdb.com/api/json/v1/1/categories.php";
     let response = await fetch(API);
-    let data = await response.json();
-    setMenu(data.meals);
+    let CategoryData = await response.json();
+    setCategory(CategoryData.categories);
+  }
+
+  async function getOnlyOneDish() {
+    const API = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef";
+    let response = await fetch(API);
+    let singleDishData = await response.json();
+    setSingleDish(singleDishData.meals);
   }
 
   useEffect(() => {
-    getAllTheMenus();
+    getAllTheCategories();
+    getOnlyOneDish();
   }, []);
 
-  let MenuImages = menu.map((item) => {
-    return (
-      <div>
-      <img src={item.strMealThumb} />
-      <h2>{item.strCategory}</h2>
-      </div>
-    );
-  });
-  console.log(menu);
-  return ( <div>{MenuImages}</div> );
+  return (
+    <div>
+      <Header />
+      <Hero />
+      <AllMenus>
+         <SpecialDishes /> 
+        
+          <FilteredDishes
+            menuCategories={category}
+            singleDish={singleDish}
+            setSingleDish={setSingleDish}
+          />
+        
+      </AllMenus>
+    </div>
+  );
 }
 
 export default Menus;

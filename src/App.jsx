@@ -1,6 +1,6 @@
 import React from "react";
 import Menus from "./components/menus";
-import "./App.css";
+import "./App.scss";
 
 function App() {
 
