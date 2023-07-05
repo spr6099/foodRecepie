@@ -6,10 +6,8 @@ npm install -D sass
 
 rename .css extension to .scss
 
-
+https://www.youtube.com/watch?v=XXavf9bQa3I&list=PLCOzHVsG8mkrePHYn73VBEK4dqwa4W7LU&index=18
 <!-- this branch works -->
-## lets create popup for each item 
-## lets close the  popup
-## props destructuring
-## send function as props 
-## load  data into popup
+global context
+     --props.children
+     

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Pagination from "./pagination";
 import CardDish from "./cardDish";
+import { MenuContext } from "./AllMenuContext";
 
 function FilteredDishes(props) {
-  let [allMenus, setAllMenus] = useState(props.allMenus);
+
+  let allMenuses = useContext(MenuContext)
+  // let [allMenus, setAllMenus] = useState(props.allMenus);
   let [filterdDishes, setFilteredDishes] = useState([]);
   let [activeDishes, setActiveDishes] = useState("Beef");
   //pagination
@@ -32,7 +35,7 @@ function FilteredDishes(props) {
   function ShowFilterdDishes(category) {
     props.setSingleDish([]);
     setActiveDishes(category);
-    let filteredDishesAre = allMenus
+    let filteredDishesAre = allMenuses
       .filter((item) => {
         return item.strCategory === category;
       })
