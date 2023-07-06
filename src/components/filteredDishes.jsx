@@ -5,7 +5,7 @@ import { MenuContext } from "./AllMenuContext";
 
 function FilteredDishes() {
   let [category, setCategory] = useState([]);
-  let [singleDish, setSingleDish] = useState();
+  let [singleDish, setSingleDish] = useState([]);
   let allMenuses = useContext(MenuContext)
   let [filterdDishes, setFilteredDishes] = useState([]);
   let [activeDishes, setActiveDishes] = useState("Beef");
