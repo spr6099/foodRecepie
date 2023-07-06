@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState , useEffect } from "react";
 import Pagination from "./pagination";
 import CardDish from "./cardDish";
 import { MenuContext } from "./AllMenuContext";
 
-function FilteredDishes(props) {
-
+function FilteredDishes() {
+  let [category, setCategory] = useState([]);
+  let [singleDish, setSingleDish] = useState();
   let allMenuses = useContext(MenuContext)
-  // let [allMenus, setAllMenus] = useState(props.allMenus);
   let [filterdDishes, setFilteredDishes] = useState([]);
   let [activeDishes, setActiveDishes] = useState("Beef");
   //pagination
@@ -16,11 +16,31 @@ function FilteredDishes(props) {
   let indexOfLastdish = currentPage * itemsPerPage;
   let indexOfFirstDish = indexOfLastdish - itemsPerPage;
 
-  let showTheseDishes = filterdDishes.slice(indexOfFirstDish, indexOfLastdish);
+ let showTheseDishes = filterdDishes.slice(indexOfFirstDish, indexOfLastdish);
+
+  async function getAllTheCategories() {
+    const API = "https://www.themealdb.com/api/json/v1/1/categories.php";
+    let response = await fetch(API);
+    let CategoryData = await response.json();
+    setCategory(CategoryData.categories);
+  }
+
+  async function getOnlyOneDish() {
+    const API = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef";
+    let response = await fetch(API);
+    let singleDishData = await response.json();
+    setSingleDish(singleDishData.meals);
+  }
+
+  useEffect(() => {
+    getAllTheCategories();
+    getOnlyOneDish();
+  }, []);
+
 
   // lets show only single dishes
   let maxLength = 8;
-  let singleDishItems = props.singleDish.map((items, index) => {
+  let singleDishItems = singleDish.map((items, index) => {
     if (index < maxLength) {
       return (
         <li>  
@@ -33,7 +53,7 @@ function FilteredDishes(props) {
 
   //  show dishes on Click
   function ShowFilterdDishes(category) {
-    props.setSingleDish([]);
+    setSingleDish([]);
     setActiveDishes(category);
     let filteredDishesAre = allMenuses
       .filter((item) => {
@@ -48,7 +68,7 @@ function FilteredDishes(props) {
   }
 
   // lets show all the categories
-  let allCategories = props.menuCategories.map((item) => {
+  let allCategories = category.map((item) => {
     return (
       <li
         className={item.strCategory == activeDishes ? "active" : ""}
