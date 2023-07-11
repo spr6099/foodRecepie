@@ -2,21 +2,26 @@ import React, { useContext, useState } from "react";
 import CardDish from "./cardDish";
 import PopUp from "./PopUp";
 import { MenuContext } from "./AllMenuContext";
-import AddToCart from "./AddToCart"
+import AddToCart from "./AddToCart";
 
 function SpecialDishes(props) {
   let [showPopUp, setShowPopUp] = useState(false);
   let [currentDish, setCurrentDish] = useState("");
+  let [addToCartImg, setAddToCartImg] = useState("")
 
   const allMenuses = useContext(MenuContext);
 
   function showPopupHandler(dishItem) {
-    console.log(dishItem);
+    // console.log(dishItem);
     setShowPopUp(true);
     setCurrentDish(dishItem);
   }
   function closePopUpHandler() {
     setShowPopUp(false);
+  }
+
+  function AddToCartHandler(AddtoCartImg,AddToCartTitle) {
+setAddToCartImg(AddtoCartImg)
   }
 
   let maxSpecialDishes = 8;
@@ -28,10 +33,12 @@ function SpecialDishes(props) {
   return (
     <section className="special-dishes ">
       {showPopUp && (
-        <PopUp closePopUp={closePopUpHandler} currentDish={currentDish}></PopUp>
+        <PopUp closePopUp={closePopUpHandler} currentDish={currentDish}
+          AddToCartHandler ={AddToCartHandler} >
+        </PopUp>
       )}
       <div className="container">
-      <AddToCart/>
+        <AddToCart addToCartImg={addToCartImg}/>
         <div className="special-dishes-content text-centre">
           <h2>our special dishes</h2>
           <p>
