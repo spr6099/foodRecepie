@@ -7,7 +7,7 @@ import AddToCart from "./AddToCart";
 function SpecialDishes(props) {
   let [showPopUp, setShowPopUp] = useState(false);
   let [currentDish, setCurrentDish] = useState("");
-  let [addToCartImg, setAddToCartImg] = useState("")
+  let [addToCartItem, setAddToCartItem] = useState([{}]);
 
   const allMenuses = useContext(MenuContext);
 
@@ -20,10 +20,9 @@ function SpecialDishes(props) {
     setShowPopUp(false);
   }
 
-  function AddToCartHandler(AddtoCartImg,AddToCartTitle) {
-setAddToCartImg(AddtoCartImg)
+  function AddToCartHandler(addtoCartImg, addToCartTitle) {
+    setAddToCartItem([{ img: addtoCartImg, title: addToCartTitle }]);
   }
-
   let maxSpecialDishes = 8;
   let specialMenu = allMenuses.map((menuItem, index) => {
     if (index < maxSpecialDishes) {
@@ -33,12 +32,14 @@ setAddToCartImg(AddtoCartImg)
   return (
     <section className="special-dishes ">
       {showPopUp && (
-        <PopUp closePopUp={closePopUpHandler} currentDish={currentDish}
-          AddToCartHandler ={AddToCartHandler} >
-        </PopUp>
+        <PopUp
+          closePopUp={closePopUpHandler}
+          currentDish={currentDish}
+          AddToCartHandler={AddToCartHandler}
+        ></PopUp>
       )}
       <div className="container">
-        <AddToCart addToCartImg={addToCartImg}/>
+        <AddToCart addToCartItem={addToCartItem} />
         <div className="special-dishes-content text-centre">
           <h2>our special dishes</h2>
           <p>
