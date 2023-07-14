@@ -7,5 +7,6 @@ npm install -D sass
 rename .css extension to .scss
 
 <!-- this branch works -->
-## add to cart
+## React Router DOM
+npm install react-router-dom
      
