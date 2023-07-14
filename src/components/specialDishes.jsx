@@ -7,7 +7,7 @@ import AddToCart from "./AddToCart";
 function SpecialDishes(props) {
   let [showPopUp, setShowPopUp] = useState(false);
   let [currentDish, setCurrentDish] = useState("");
-  let [addToCartItem, setAddToCartItem] = useState([{}]);
+  let [addToCartItem, setAddToCartItem] = useState([]);
 
   const allMenuses = useContext(MenuContext);
 
@@ -21,7 +21,7 @@ function SpecialDishes(props) {
   }
 
   function AddToCartHandler(addtoCartImg, addToCartTitle) {
-    setAddToCartItem([{ img: addtoCartImg, title: addToCartTitle }]);
+    setAddToCartItem([...addToCartItem,{ img: addtoCartImg, title: addToCartTitle }]);
   }
   let maxSpecialDishes = 8;
   let specialMenu = allMenuses.map((menuItem, index) => {
