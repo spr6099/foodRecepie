@@ -16,16 +16,20 @@ function Menus() {
         <Routes>
 
           {/* page1 */}
-          <Route path="/">
+          <Route exact path="/"
+            element={
           <AllMenus>
          <SpecialDishes />  
           <FilteredDishes />
           </AllMenus>
+          }>
           </Route>
 
           {/* page2 */}
-          <Route path="/Checkout">
+          <Route path="/Checkout"
+            element={
             <Checkout/>
+          }>
           </Route>
         </Routes>
 
