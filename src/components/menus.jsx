@@ -5,12 +5,14 @@ import FilteredDishes from "./filteredDishes";
 import Header from "./header";
 import {AllMenus} from "./AllMenuContext";
 import Checkout from "./Checkout";
+import { AppProvider } from "../context/AppProvider";
 
 function Menus() {
 
   return (
     <div>
       <Router>
+        <AppProvider>
       <Header />
       <Hero />
         <Routes>
@@ -32,7 +34,7 @@ function Menus() {
           }>
           </Route>
         </Routes>
-
+        </AppProvider>
       </Router>
     </div>
   );
